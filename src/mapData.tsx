@@ -44,7 +44,6 @@ const MapData = () => {
   //   ],
   // ]
 
-
   const result = data.reduce((acc: any[], cur) => {
     const provinceIndex = acc.findIndex((p) => p[0] === cur.province_en)
     if (provinceIndex === -1) {
@@ -52,13 +51,13 @@ const MapData = () => {
     } else {
       const amphoeIndex = (acc[provinceIndex][1] as any[]).findIndex((a: any) => a[0] === cur.amphoe_en)
       if (amphoeIndex === -1) {
-        ;(acc[provinceIndex][1] as any[]).push([cur.amphoe_en, [[cur.district_en, [cur.zipcode]]]])
+        (acc[provinceIndex][1] as any[]).push([cur.amphoe_en, [[cur.district_en, [cur.zipcode]]]])
       } else {
         const districtIndex = (acc[provinceIndex][1][amphoeIndex][1] as any[]).findIndex((d) => d[0] === cur.district_en)
         if (districtIndex === -1) {
-          ;(acc[provinceIndex][1][amphoeIndex][1] as any[]).push([cur.district_en, [cur.zipcode]])
+          (acc[provinceIndex][1][amphoeIndex][1] as any[]).push([cur.district_en, [cur.zipcode]])
         } else {
-          ;(acc[provinceIndex][1][amphoeIndex][1][districtIndex][1] as any).push(cur.zipcode)
+          (acc[provinceIndex][1][amphoeIndex][1][districtIndex][1] as any).push(cur.zipcode)
         }
       }
     }
