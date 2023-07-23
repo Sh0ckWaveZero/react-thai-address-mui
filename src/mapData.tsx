@@ -1,8 +1,6 @@
 import data from './database/raw_database/raw_database-en'
 
-type Props = {}
-
-const MapData = (props: Props) => {
+const MapData = () => {
   // [
   //   {
   //     "district": "แคน",
@@ -46,20 +44,6 @@ const MapData = (props: Props) => {
   //   ],
   // ]
 
-  interface District {
-    name: string
-    zipcodes: string[]
-  }
-
-  interface Amphoe {
-    name: string
-    districts: District[]
-  }
-
-  interface Province {
-    name: string
-    amphoes: Amphoe[]
-  }
 
   const result = data.reduce((acc: any[], cur) => {
     const provinceIndex = acc.findIndex((p) => p[0] === cur.province_en)
