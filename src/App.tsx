@@ -1,8 +1,10 @@
 import { Fragment, useState } from 'react'
-import { Autocomplete, Box, Card, CardContent, CardHeader, Container, Grid, TextField, Typography } from '@mui/material'
+import { Box, Card, Container, Typography } from '@mui/material'
 import AppAppBar from './views/AppAppBar'
 import { thaiAddressTree } from './database/raw_database/thai-address-tree'
 import { thaiAddressEnTreesEnTree } from './database/raw_database/thai-address-en-tree'
+import EnglishAddressCard from './components/EnglishAddressCard'
+import ThaiAddressCard from './components/ThaiAddressCard'
 
 type AddressDatabase = Province[]
 
@@ -190,239 +192,6 @@ function App() {
     setZipcodeEn(value)
   }
 
-  const card = (
-    <Fragment>
-      <CardHeader
-        title={
-          <Typography variant='h6' component='h2' gutterBottom>
-            ที่อยู่ภาษาไทย
-          </Typography>
-        }
-      />
-      <CardContent>
-        <Grid container spacing={2} direction='row' justifyContent='center' alignItems='baseline'>
-          <Grid item xs={12} sm={6}>
-            <Typography variant='body1' color='text.main'>
-              <label style={{ color: 'red' }}>* </label>Address autocomplete:
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <Grid container spacing={2} direction='row' justifyContent='center' alignItems='baseline'>
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-province'
-                  size='small'
-                  fullWidth
-                  options={thaiAddress.map((province: any, index: number) => {
-                    return { key: index, label: province[0] }
-                  })}
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeProvince}
-                  renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={handleOnSelectProvince}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-amphoe'
-                  size='small'
-                  fullWidth
-                  disabled={province?.key === 0 && province?.label === '' ? true : false}
-                  value={amphoe}
-                  options={
-                    province && thaiAddress[province?.key]
-                      ? (thaiAddress[province?.key][1] as any[]).map((amphoe: any, index: number) => {
-                          return { key: index, label: amphoe[0] }
-                        })
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeAmphoe}
-                  renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={handleOnSelectAmphoe}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-tambon'
-                  size='small'
-                  fullWidth
-                  disabled={amphoe?.key === 0 && amphoe?.label === '' ? true : false}
-                  value={tambon}
-                  options={
-                    amphoe && thaiAddress[province?.key] && thaiAddress[province.key][1][amphoe.key]
-                      ? (thaiAddress[province.key][1][amphoe.key][1] as any[]).map((tambon: any, index: number) => {
-                          return { key: index, label: tambon[0] }
-                        })
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeTambon}
-                  renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={handleOnSelectTambon}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-zipcode'
-                  size='small'
-                  fullWidth
-                  disabled={tambon?.key === 0 && tambon?.label === '' ? true : false}
-                  value={zipcode}
-                  options={
-                    tambon && thaiAddress[province?.key] && thaiAddress[province.key][1][amphoe?.key]
-                      ? (thaiAddress[province.key][1][amphoe.key][1][tambon.key][1] as any[]).map((zipcode: any, index: number) => ({
-                          key: index,
-                          label: zipcode.toString(),
-                        }))
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeZipcode}
-                  renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={handleOnSelectZipcode}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Fragment>
-  )
-
-  const cardThaiAddressEn = (
-    <Fragment>
-      <CardHeader
-        title={
-          <Typography variant='h6' component='h2' gutterBottom>
-            ที่อยู่ภาษาอังกฤษ
-          </Typography>
-        }
-      />
-      <CardContent>
-        <Grid container spacing={2} direction='row' justifyContent='center' alignItems='baseline'>
-          <Grid item xs={12} sm={6}>
-            <Typography variant='body1' color='text.main'>
-              <label style={{ color: 'red' }}>* </label>Address autocomplete:
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <Grid container spacing={2} direction='row' justifyContent='center' alignItems='baseline'>
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-province-en'
-                  size='small'
-                  fullWidth
-                  options={thaiAddressEN.map((province: any, index: number) => {
-                    return { key: index, label: province[0] }
-                  })}
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeProvinceEn}
-                  renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={handleOnSelectProvinceEn}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-amphoe-en'
-                  size='small'
-                  fullWidth
-                  disabled={provinceEn?.key === 0 && provinceEn?.label === '' ? true : false}
-                  value={amphoeEn}
-                  options={
-                    amphoeEn && thaiAddressEN[provinceEn?.key] && thaiAddressEN[provinceEn.key][1][amphoeEn.key]
-                      ? (thaiAddressEN[provinceEn.key][1] as any[]).map((amphoe: any, index: number) => {
-                          return { key: index, label: amphoe[0] }
-                        })
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeAmphoeEn}
-                  renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={handleOnSelectAmphoeEn}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-tambon-en'
-                  size='small'
-                  fullWidth
-                  disabled={amphoeEn?.key === 0 && amphoeEn?.label === '' ? true : false}
-                  value={tambonEn}
-                  options={
-                    amphoeEn && thaiAddressEN[provinceEn?.key] && thaiAddressEN[provinceEn.key][1][amphoeEn.key]
-                      ? (thaiAddressEN[provinceEn.key][1][amphoeEn.key][1] as any[]).map((tambon: any, index: number) => {
-                          return { key: index, label: tambon[0] }
-                        })
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeTambonEn}
-                  renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={handleOnSelectTambonEn}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id='combo-box-zipcode-en'
-                  size='small'
-                  fullWidth
-                  disabled={tambonEn?.key === 0 && tambonEn?.label === '' ? true : false}
-                  value={zipcodeEn}
-                  options={
-                    tambonEn && thaiAddressEN[provinceEn?.key] && thaiAddressEN[provinceEn.key][1][amphoeEn?.key]
-                      ? (thaiAddressEN[provinceEn.key][1][amphoeEn.key][1][tambonEn.key][1] as any[]).map(
-                          (zipcode: any, index: number) => ({
-                            key: index,
-                            label: zipcode.toString(),
-                          })
-                        )
-                      : []
-                  }
-                  isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={handleOnChangeZipcodeEn}
-                  renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={handleOnSelectZipcodeEn}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Fragment>
-  )
-
   return (
     <Fragment>
       <AppAppBar />
@@ -433,9 +202,39 @@ function App() {
           </Typography>
         </Box>
         <Card variant='elevation' sx={{ mb: 3 }}>
-          {card}
+          <ThaiAddressCard
+            thaiAddress={thaiAddress}
+            province={province}
+            amphoe={amphoe}
+            tambon={tambon}
+            zipcode={zipcode}
+            onChangeProvince={handleOnChangeProvince}
+            onSelectProvince={handleOnSelectProvince}
+            onChangeAmphoe={handleOnChangeAmphoe}
+            onSelectAmphoe={handleOnSelectAmphoe}
+            onChangeTambon={handleOnChangeTambon}
+            onSelectTambon={handleOnSelectTambon}
+            onChangeZipcode={handleOnChangeZipcode}
+            onSelectZipcode={handleOnSelectZipcode}
+          />
         </Card>
-        <Card variant='elevation'>{cardThaiAddressEn}</Card>
+        <Card variant='elevation'>
+          <EnglishAddressCard
+            thaiAddressEN={thaiAddressEN}
+            provinceEn={provinceEn}
+            amphoeEn={amphoeEn}
+            tambonEn={tambonEn}
+            zipcodeEn={zipcodeEn}
+            onChangeProvince={handleOnChangeProvinceEn}
+            onSelectProvince={handleOnSelectProvinceEn}
+            onChangeAmphoe={handleOnChangeAmphoeEn}
+            onSelectAmphoe={handleOnSelectAmphoeEn}
+            onChangeTambon={handleOnChangeTambonEn}
+            onSelectTambon={handleOnSelectTambonEn}
+            onChangeZipcode={handleOnChangeZipcodeEn}
+            onSelectZipcode={handleOnSelectZipcodeEn}
+          />
+        </Card>
       </Container>
     </Fragment>
   )
