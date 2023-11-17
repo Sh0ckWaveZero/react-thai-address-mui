@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
-import { CardHeader, CardContent, Grid, Typography, TextField } from '@mui/material'
-import Autocomplete from '@mui/material/Autocomplete'
+import { Autocomplete, CardHeader, CardContent, Grid, Typography, TextField } from '@mui/material'
+
+type AddressType = 'ProvinceEn' | 'AmphoeEn' | 'TambonEn' | 'ZipcodeEn'
 
 interface EnglishAddressCardProps {
   thaiAddressEN: any[]
@@ -8,14 +9,8 @@ interface EnglishAddressCardProps {
   amphoeEn: any
   tambonEn: any
   zipcodeEn: any
-  onChangeProvince: (event: any, newValue: any) => void
-  onSelectProvince: (event: any, newValue: any) => void
-  onChangeAmphoe: (event: any, newValue: any) => void
-  onSelectAmphoe: (event: any, newValue: any) => void
-  onChangeTambon: (event: any, newValue: any) => void
-  onSelectTambon: (event: any, newValue: any) => void
-  onChangeZipcode: (event: any, newValue: any) => void
-  onSelectZipcode: (event: any, newValue: any) => void
+  onChange: (type: AddressType, event: any, newValue: any) => void
+  onSelect: (type: AddressType, event: any, newValue: any) => void
 }
 
 const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
@@ -24,14 +19,8 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
   amphoeEn,
   tambonEn,
   zipcodeEn,
-  onChangeProvince,
-  onSelectProvince,
-  onChangeAmphoe,
-  onSelectAmphoe,
-  onChangeTambon,
-  onSelectTambon,
-  onChangeZipcode,
-  onSelectZipcode,
+  onChange,
+  onSelect,
 }) => {
   return (
     <Fragment>
@@ -70,9 +59,9 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
                     return { key: index, label: province[0] }
                   })}
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeProvince}
+                  onChange={(event: any, value: any) => onChange('ProvinceEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={onSelectProvince}
+                  onInputChange={(event: any, value: any) => onSelect('ProvinceEn', event, value)}
                 />
               </Grid>
 
@@ -92,9 +81,9 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeAmphoe}
+                  onChange={(event: any, value: any) => onChange('AmphoeEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={onSelectAmphoe}
+                  onInputChange={(event: any, value: any) => onSelect('AmphoeEn', event, value)}
                 />
               </Grid>
 
@@ -114,9 +103,9 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeTambon}
+                  onChange={(event: any, value: any) => onChange('TambonEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={onSelectTambon}
+                  onInputChange={(event: any, value: any) => onSelect('TambonEn', event, value)}
                 />
               </Grid>
 
@@ -139,9 +128,9 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeZipcode}
+                  onChange={(event: any, value: any) => onChange('ZipcodeEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={onSelectZipcode}
+                  onInputChange={(event: any, value: any) => onSelect('ZipcodeEn', event, value)}
                 />
               </Grid>
             </Grid>
