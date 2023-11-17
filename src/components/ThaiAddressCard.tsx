@@ -2,37 +2,18 @@ import React, { Fragment } from 'react'
 import { CardHeader, CardContent, Grid, Typography, TextField } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
 
+type AddressType = 'Province' | 'Amphoe' | 'Tambon' | 'Zipcode'
 interface ThaiAddressCardProps {
   thaiAddress: any[]
   province: any
   amphoe: any
   tambon: any
   zipcode: any
-  onChangeProvince: (event: any, newValue: any) => void
-  onSelectProvince: (event: any, newValue: any) => void
-  onChangeAmphoe: (event: any, newValue: any) => void
-  onSelectAmphoe: (event: any, newValue: any) => void
-  onChangeTambon: (event: any, newValue: any) => void
-  onSelectTambon: (event: any, newValue: any) => void
-  onChangeZipcode: (event: any, newValue: any) => void
-  onSelectZipcode: (event: any, newValue: any) => void
+  onChange: (type: AddressType, event: any, newValue: any) => void
+  onSelect: (type: AddressType, event: any, newValue: any) => void
 }
 
-const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({
-  thaiAddress,
-  province,
-  amphoe,
-  tambon,
-  zipcode,
-  onChangeProvince,
-  onSelectProvince,
-  onChangeAmphoe,
-  onSelectAmphoe,
-  onChangeTambon,
-  onSelectTambon,
-  onChangeZipcode,
-  onSelectZipcode,
-}) => {
+const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province, amphoe, tambon, zipcode, onChange, onSelect }) => {
   return (
     <Fragment>
       <CardHeader
@@ -70,9 +51,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({
                     return { key: index, label: province[0] }
                   })}
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeProvince}
+                  onChange={(event: any, value: any) => onChange('Province', event, value)}
                   renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={onSelectProvince}
+                  onInputChange={(event: any, value: any) => onSelect('Province', event, value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,9 +72,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeAmphoe}
+                  onChange={(event: any, value: any) => onChange('Amphoe', event, value)}
                   renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={onSelectAmphoe}
+                  onInputChange={(event: any, value: any) => onSelect('Amphoe', event, value)}
                 />
               </Grid>
 
@@ -113,9 +94,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeTambon}
+                  onChange={(event: any, value: any) => onChange('Tambon', event, value)}
                   renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={onSelectTambon}
+                  onInputChange={(event: any, value: any) => onSelect('Tambon', event, value)}
                 />
               </Grid>
 
@@ -136,9 +117,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={onChangeZipcode}
+                  onChange={(event: any, value: any) => onChange('Zipcode', event, value)}
                   renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={onSelectZipcode}
+                  onInputChange={(event: any, value: any) => onSelect('Zipcode', event, value)}
                 />
               </Grid>
             </Grid>
