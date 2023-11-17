@@ -44,152 +44,124 @@ function App() {
   const [tambonEn, setTambonEn] = useState(initValue)
   const [zipcodeEn, setZipcodeEn] = useState(initValue)
 
-  const handleOnChangeProvince = (event: any, value: any) => {
+  const handleOnChange = (type: string, event: any, value: any) => {
     event.preventDefault()
-    setProvince(value)
-  }
 
-  const handleOnChangeProvinceEn = (event: any, value: any) => {
-    event.preventDefault()
-    setProvinceEn(value)
-  }
-
-  const handleOnChangeAmphoe = (event: any, value: any) => {
-    event.preventDefault()
-    if (province?.key === 0 && province?.label === '') {
-      setAmphoe(initValue)
-      return
+    switch (type) {
+      case 'Province':
+        setProvince(value)
+        break
+      case 'ProvinceEn':
+        setProvinceEn(value)
+        break
+      case 'Amphoe':
+        if (province?.key === 0 && province?.label === '') {
+          setAmphoe(initValue)
+          return
+        }
+        setAmphoe(value)
+        break
+      case 'AmphoeEn':
+        if (provinceEn?.key === 0 && provinceEn?.label === '') {
+          setAmphoeEn(initValue)
+          return
+        }
+        setAmphoeEn(value)
+        break
+      case 'Tambon':
+        if (amphoe?.key === 0 && amphoe?.label === '') {
+          setTambon(initValue)
+          return
+        }
+        setTambon(value)
+        break
+      case 'TambonEn':
+        if (amphoeEn?.key === 0 && amphoeEn?.label === '') {
+          setTambonEn(initValue)
+          return
+        }
+        setTambonEn(value)
+        break
+      case 'Zipcode':
+        if (tambon?.key === 0 && tambon?.label === '') {
+          setZipcode(initValue)
+          return
+        }
+        setZipcode(value)
+        break
+      case 'ZipcodeEn':
+        if (tambonEn?.key === 0 && tambonEn?.label === '') {
+          setZipcodeEn(initValue)
+          return
+        }
+        setZipcodeEn(value)
+        break
     }
-    setAmphoe(value)
   }
 
-  const handleOnChangeAmphoeEn = (event: any, value: any) => {
-    event.preventDefault()
-    if (provinceEn?.key === 0 && provinceEn?.label === '') {
-      setAmphoeEn(initValue)
-      return
+  const handleOnSelect = (type: string, event: any, value: any) => {
+    switch (type) {
+      case 'Province':
+        if (value === '') {
+          setProvince(initValue)
+          setAmphoe(initValue)
+          setTambon(initValue)
+          setZipcode(initValue)
+        }
+        setProvince(value)
+        break
+      case 'ProvinceEn':
+        if (value === '') {
+          setProvinceEn(initValue)
+          setAmphoeEn(initValue)
+          setTambonEn(initValue)
+          setZipcodeEn(initValue)
+        }
+        setProvinceEn(value)
+        break
+      case 'Amphoe':
+        if (value === '') {
+          setAmphoe(initValue)
+          setTambon(initValue)
+          setZipcode(initValue)
+        }
+        setAmphoe(value)
+        break
+      case 'AmphoeEn':
+        if (value === '') {
+          setAmphoeEn(initValue)
+          setTambonEn(initValue)
+          setZipcodeEn(initValue)
+        }
+        setAmphoeEn(value)
+        break
+      case 'Tambon':
+        if (value === '') {
+          setTambon(initValue)
+          setZipcode(initValue)
+        }
+        setTambon(value)
+        break
+      case 'TambonEn':
+        if (value === '') {
+          setTambonEn(initValue)
+          setZipcodeEn(initValue)
+        }
+        setTambonEn(value)
+        break
+      case 'Zipcode':
+        if (value === '') {
+          setZipcode(initValue)
+        }
+        setZipcode(value)
+        break
+      case 'ZipcodeEn':
+        if (value === '') {
+          setZipcodeEn(initValue)
+        }
+        setZipcodeEn(value)
+        break
     }
-    setAmphoeEn(value)
-  }
-
-  const handleOnChangeTambon = (event: any, value: any) => {
-    event.preventDefault()
-    if (amphoe?.key === 0 && amphoe?.label === '') {
-      setTambon(initValue)
-      return
-    }
-    setTambon(value)
-  }
-
-  const handleOnChangeTambonEn = (event: any, value: any) => {
-    event.preventDefault()
-    if (amphoeEn?.key === 0 && amphoeEn?.label === '') {
-      setTambonEn(initValue)
-      return
-    }
-    setTambonEn(value)
-  }
-
-  const handleOnChangeZipcode = (event: any, value: any) => {
-    event?.preventDefault()
-    if (tambon?.key === 0 && tambon?.label === '') {
-      setZipcode(initValue)
-      return
-    }
-    setZipcode(value)
-  }
-
-  const handleOnChangeZipcodeEn = (event: any, value: any) => {
-    event?.preventDefault()
-    if (tambonEn?.key === 0 && tambonEn?.label === '') {
-      setZipcodeEn(initValue)
-      return
-    }
-    setZipcodeEn(value)
-  }
-
-  const handleOnSelectProvince = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setProvince(initValue)
-      setAmphoe(initValue)
-      setTambon(initValue)
-      setZipcode(initValue)
-      return
-    }
-    setProvince(value)
-  }
-
-  const handleOnSelectProvinceEn = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setProvinceEn(initValue)
-      setAmphoeEn(initValue)
-      setTambonEn(initValue)
-      setZipcodeEn(initValue)
-      return
-    }
-    setProvinceEn(value)
-  }
-
-  const handleOnSelectAmphoe = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setAmphoe(initValue)
-      setTambon(initValue)
-      setZipcode(initValue)
-      return
-    }
-    setAmphoe(value)
-  }
-
-  const handleOnSelectAmphoeEn = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setAmphoeEn(initValue)
-      setTambonEn(initValue)
-      setZipcodeEn(initValue)
-      return
-    }
-    setAmphoeEn(value)
-  }
-
-  const handleOnSelectTambon = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setTambon(initValue)
-      setZipcode(initValue)
-      return
-    }
-    setTambon(value)
-  }
-
-  const handleOnSelectTambonEn = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setTambonEn(initValue)
-      setZipcodeEn(initValue)
-      return
-    }
-    setTambonEn(value)
-  }
-
-  const handleOnSelectZipcode = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setZipcode(initValue)
-      return
-    }
-    setZipcode(value)
-  }
-
-  const handleOnSelectZipcodeEn = (event: any, value: any) => {
-    event?.preventDefault()
-    if (value === '') {
-      setZipcodeEn(initValue)
-      return
-    }
-    setZipcodeEn(value)
   }
 
   return (
@@ -208,14 +180,8 @@ function App() {
             amphoe={amphoe}
             tambon={tambon}
             zipcode={zipcode}
-            onChangeProvince={handleOnChangeProvince}
-            onSelectProvince={handleOnSelectProvince}
-            onChangeAmphoe={handleOnChangeAmphoe}
-            onSelectAmphoe={handleOnSelectAmphoe}
-            onChangeTambon={handleOnChangeTambon}
-            onSelectTambon={handleOnSelectTambon}
-            onChangeZipcode={handleOnChangeZipcode}
-            onSelectZipcode={handleOnSelectZipcode}
+            onChange={handleOnChange}
+            onSelect={handleOnSelect}
           />
         </Card>
         <Card variant='elevation'>
@@ -225,14 +191,8 @@ function App() {
             amphoeEn={amphoeEn}
             tambonEn={tambonEn}
             zipcodeEn={zipcodeEn}
-            onChangeProvince={handleOnChangeProvinceEn}
-            onSelectProvince={handleOnSelectProvinceEn}
-            onChangeAmphoe={handleOnChangeAmphoeEn}
-            onSelectAmphoe={handleOnSelectAmphoeEn}
-            onChangeTambon={handleOnChangeTambonEn}
-            onSelectTambon={handleOnSelectTambonEn}
-            onChangeZipcode={handleOnChangeZipcodeEn}
-            onSelectZipcode={handleOnSelectZipcodeEn}
+            onChange={handleOnChange}
+            onSelect={handleOnSelect}
           />
         </Card>
       </Container>
