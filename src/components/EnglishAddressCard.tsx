@@ -7,7 +7,7 @@ interface EnglishAddressCardProps {
   data: any[]
   state: any
   onChange: (type: AddressType, event: any, newValue: any) => void
-  onSelect: (type: AddressType, event: SyntheticEvent<Element, Event>, newValue: any) => void
+  onSelect: (type: AddressType, newValue: any) => void
 }
 
 const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({ data, state, onChange, onSelect }) => {
@@ -50,7 +50,7 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({ data, state, on
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('ProvinceEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('ProvinceEn', event, value)}
+                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('ProvinceEn', value)}
                 />
               </Grid>
 
@@ -72,7 +72,7 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({ data, state, on
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('AmphoeEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('AmphoeEn', event, value)}
+                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('AmphoeEn', value)}
                 />
               </Grid>
 
@@ -94,7 +94,7 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({ data, state, on
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('TambonEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('TambonEn', event, value)}
+                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('TambonEn', value)}
                 />
               </Grid>
 
@@ -122,7 +122,7 @@ const EnglishAddressCard: React.FC<EnglishAddressCardProps> = ({ data, state, on
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('ZipcodeEn', event, value)}
                   renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('ZipcodeEn', event, value)}
+                  onInputChange={(event: SyntheticEvent<Element, Event>, value: any) => onSelect('ZipcodeEn', value)}
                 />
               </Grid>
             </Grid>

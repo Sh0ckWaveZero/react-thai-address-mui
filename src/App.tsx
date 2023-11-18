@@ -95,7 +95,7 @@ function App() {
     }
   }
 
-  const handleOnSelect = (type: string, event: any, value: any) => {
+  const handleOnSelect = (type: string, value: any) => {
     switch (type) {
       case 'Province':
         if (value === '') {
