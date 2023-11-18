@@ -4,16 +4,13 @@ import Autocomplete from '@mui/material/Autocomplete'
 
 type AddressType = 'Province' | 'Amphoe' | 'Tambon' | 'Zipcode'
 interface ThaiAddressCardProps {
-  thaiAddress: any[]
-  province: any
-  amphoe: any
-  tambon: any
-  zipcode: any
+  data: any[]
+  state: any
   onChange: (type: AddressType, event: any, newValue: any) => void
   onSelect: (type: AddressType, event: any, newValue: any) => void
 }
 
-const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province, amphoe, tambon, zipcode, onChange, onSelect }) => {
+const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange, onSelect }) => {
   return (
     <Fragment>
       <CardHeader
@@ -47,7 +44,7 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province
                   id='combo-box-province'
                   size='small'
                   fullWidth
-                  options={thaiAddress.map((province: any, index: number) => {
+                  options={data.map((province: any, index: number) => {
                     return { key: index, label: province[0] }
                   })}
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
@@ -62,11 +59,11 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province
                   id='combo-box-amphoe'
                   size='small'
                   fullWidth
-                  disabled={province?.key === 0 && province?.label === '' ? true : false}
-                  value={amphoe}
+                  disabled={state.province?.key === 0 && state.province?.label === '' ? true : false}
+                  value={state.amphoe}
                   options={
-                    province && thaiAddress[province?.key]
-                      ? (thaiAddress[province?.key][1] as any[]).map((amphoe: any, index: number) => {
+                    state.province && data[state.province?.key]
+                      ? (data[state.province?.key][1] as any[]).map((amphoe: any, index: number) => {
                           return { key: index, label: amphoe[0] }
                         })
                       : []
@@ -84,11 +81,11 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province
                   id='combo-box-tambon'
                   size='small'
                   fullWidth
-                  disabled={amphoe?.key === 0 && amphoe?.label === '' ? true : false}
-                  value={tambon}
+                  disabled={state.amphoe?.key === 0 && state.amphoe?.label === '' ? true : false}
+                  value={state.tambon}
                   options={
-                    amphoe && thaiAddress[province?.key] && thaiAddress[province.key][1][amphoe.key]
-                      ? (thaiAddress[province.key][1][amphoe.key][1] as any[]).map((tambon: any, index: number) => {
+                    state.amphoe && data[state.province?.key] && data[state.province.key][1][state.amphoe.key]
+                      ? (data[state.province.key][1][state.amphoe.key][1] as any[]).map((tambon: any, index: number) => {
                           return { key: index, label: tambon[0] }
                         })
                       : []
@@ -106,14 +103,19 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ thaiAddress, province
                   id='combo-box-zipcode'
                   size='small'
                   fullWidth
-                  disabled={tambon?.key === 0 && tambon?.label === '' ? true : false}
-                  value={zipcode}
+                  disabled={state.tambon?.key === 0 && state.tambon?.label === '' ? true : false}
+                  value={state.zipcode}
                   options={
-                    tambon && thaiAddress[province?.key] && thaiAddress[province.key][1][amphoe?.key]
-                      ? (thaiAddress[province.key][1][amphoe.key][1][tambon.key][1] as any[]).map((zipcode: any, index: number) => ({
-                          key: index,
-                          label: zipcode.toString(),
-                        }))
+                    state.tambon &&
+                    data[state.province?.key] &&
+                    data[state.province.key][1][state.amphoe?.key] &&
+                    data[state.province.key][1][state.amphoe.key][1][state.tambon.key]
+                      ? (data[state.province.key][1][state.amphoe.key][1][state.tambon.key][1] as any[]).map(
+                          (zipcode: any, index: number) => ({
+                            key: index,
+                            label: zipcode.toString(),
+                          })
+                        )
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
