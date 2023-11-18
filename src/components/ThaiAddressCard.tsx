@@ -50,7 +50,7 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('Province', event, value)}
                   renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={(event: any, value: any) => onSelect('Province', value)}
+                  onInputChange={(_, value: any) => onSelect('Province', value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -71,7 +71,7 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('Amphoe', event, value)}
                   renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={(event: any, value: any) => onSelect('Amphoe', value)}
+                  onInputChange={(_, value: any) => onSelect('Amphoe', value)}
                 />
               </Grid>
 
@@ -93,7 +93,7 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('Tambon', event, value)}
                   renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={(event: any, value: any) => onSelect('Tambon', value)}
+                  onInputChange={(_, value: any) => onSelect('Tambon', value)}
                 />
               </Grid>
 
@@ -121,7 +121,7 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
                   onChange={(event: any, value: any) => onChange('Zipcode', event, value)}
                   renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={(event: any, value: any) => onSelect('Zipcode', value)}
+                  onInputChange={(_, value: any) => onSelect('Zipcode', value)}
                 />
               </Grid>
             </Grid>
