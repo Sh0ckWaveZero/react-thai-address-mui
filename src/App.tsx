@@ -1,100 +1,96 @@
-import { Fragment, useState } from 'react'
+import { Address, AddressDatabase } from './interfaces/address'
 import { Box, Card, Container, Typography } from '@mui/material'
+import { Fragment, useState } from 'react'
+
 import AppAppBar from './views/AppAppBar'
-import { thaiAddressTree } from './database/raw_database/thai-address-tree'
-import { thaiAddressEnTreesEnTree } from './database/raw_database/thai-address-en-tree'
 import EnglishAddressCard from './components/EnglishAddressCard'
 import ThaiAddressCard from './components/ThaiAddressCard'
+import { thaiAddressEnTreesEnTree } from './database/raw_database/thai-address-en-tree'
+import { thaiAddressTree } from './database/raw_database/thai-address-tree'
 
-type AddressDatabase = Province[]
-
-interface Province extends AddressBase {
-  1: Amphoe[]
-}
-
-interface Amphoe extends AddressBase {
-  1: Tambon[]
-}
-
-interface Tambon extends AddressBase {
-  1: ZipCode[]
-}
-
-type ZipCode = string
-
-interface AddressBase {
-  0: string
-}
+const thaiAddress: AddressDatabase = thaiAddressTree as unknown as AddressDatabase
+const thaiAddressEN: AddressDatabase = thaiAddressEnTreesEnTree as unknown as AddressDatabase
 
 const initValue = {
   key: 0,
   label: '',
 }
 
-const thaiAddress: AddressDatabase = thaiAddressTree as unknown as AddressDatabase
-const thaiAddressEN: AddressDatabase = thaiAddressEnTreesEnTree as unknown as AddressDatabase
-
 function App() {
-  const [province, setProvince] = useState(initValue)
-  const [amphoe, setAmphoe] = useState(initValue)
-  const [tambon, setTambon] = useState(initValue)
-  const [zipcode, setZipcode] = useState(initValue)
-  const [provinceEn, setProvinceEn] = useState(initValue)
-  const [amphoeEn, setAmphoeEn] = useState(initValue)
-  const [tambonEn, setTambonEn] = useState(initValue)
-  const [zipcodeEn, setZipcodeEn] = useState(initValue)
+  const [address, setAddress] = useState<Address>({
+    province: initValue,
+    amphoe: initValue,
+    tambon: initValue,
+    zipcode: initValue,
+    provinceEn: initValue,
+    amphoeEn: initValue,
+    tambonEn: initValue,
+    zipcodeEn: initValue,
+  })
 
   const handleOnChange = (type: string, event: any, value: any) => {
     event.preventDefault()
 
     switch (type) {
       case 'Province':
-        setProvince(value)
+        setAddress((prevState) => ({
+          ...prevState,
+          province: value,
+        }))
         break
       case 'ProvinceEn':
-        setProvinceEn(value)
+        setAddress((prevState) => ({
+          ...prevState,
+          provinceEn: value,
+        }))
         break
       case 'Amphoe':
-        if (province?.key === 0 && province?.label === '') {
-          setAmphoe(initValue)
+        if (address.province?.key === 0 && address.province?.label === '') {
+          setAddress((prevState) => ({
+            ...prevState,
+            province: value,
+          }))
           return
         }
-        setAmphoe(value)
+        setAddress((prevState) => ({
+          ...prevState,
+          amphoe: value,
+        }))
         break
       case 'AmphoeEn':
-        if (provinceEn?.key === 0 && provinceEn?.label === '') {
-          setAmphoeEn(initValue)
+        if (address.provinceEn?.key === 0 && address.provinceEn?.label === '') {
+          setAddress((prevState) => ({ ...prevState, amphoeEn: initValue }))
           return
         }
-        setAmphoeEn(value)
+        setAddress((prevState) => ({ ...prevState, amphoeEn: value }))
         break
       case 'Tambon':
-        if (amphoe?.key === 0 && amphoe?.label === '') {
-          setTambon(initValue)
+        if (address.amphoe?.key === 0 && address.amphoe?.label === '') {
+          setAddress((prevState) => ({ ...prevState, tambon: initValue }))
           return
         }
-        setTambon(value)
+        setAddress((prevState) => ({ ...prevState, tambon: value }))
         break
       case 'TambonEn':
-        if (amphoeEn?.key === 0 && amphoeEn?.label === '') {
-          setTambonEn(initValue)
+        if (address.amphoeEn?.key === 0 && address.amphoeEn?.label === '') {
+          setAddress((prevState) => ({ ...prevState, tambonEn: initValue }))
           return
         }
-        setTambonEn(value)
+        setAddress((prevState) => ({ ...prevState, tambonEn: value }))
         break
       case 'Zipcode':
-        if (tambon?.key === 0 && tambon?.label === '') {
-          setZipcode(initValue)
+        if (address.tambon?.key === 0 && address.tambon?.label === '') {
+          setAddress((prevState) => ({ ...prevState, zipcode: initValue }))
           return
         }
-        setZipcode(value)
+        setAddress((prevState) => ({ ...prevState, zipcode: value }))
         break
       case 'ZipcodeEn':
-        if (tambonEn?.key === 0 && tambonEn?.label === '') {
-          setZipcodeEn(initValue)
+        if (address.tambonEn?.key === 0 && address.tambonEn?.label === '') {
+          setAddress((prevState) => ({ ...prevState, zipcodeEn: initValue }))
           return
         }
-        setZipcodeEn(value)
+        setAddress((prevState) => ({ ...prevState, zipcodeEn: value }))
         break
     }
   }
@@ -103,63 +99,89 @@ function App() {
     switch (type) {
       case 'Province':
         if (value === '') {
-          setProvince(initValue)
-          setAmphoe(initValue)
-          setTambon(initValue)
-          setZipcode(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            province: initValue,
+            amphoe: initValue,
+            tambon: initValue,
+            zipcode: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, province: value }))
         }
-        setProvince(value)
         break
       case 'ProvinceEn':
         if (value === '') {
-          setProvinceEn(initValue)
-          setAmphoeEn(initValue)
-          setTambonEn(initValue)
-          setZipcodeEn(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            provinceEn: initValue,
+            amphoeEn: initValue,
+            tambonEn: initValue,
+            zipcodeEn: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, provinceEn: value }))
         }
-        setProvinceEn(value)
         break
       case 'Amphoe':
         if (value === '') {
-          setAmphoe(initValue)
-          setTambon(initValue)
-          setZipcode(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            amphoe: initValue,
+            tambon: initValue,
+            zipcode: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, amphoe: value }))
         }
-        setAmphoe(value)
         break
       case 'AmphoeEn':
         if (value === '') {
-          setAmphoeEn(initValue)
-          setTambonEn(initValue)
-          setZipcodeEn(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            amphoeEn: initValue,
+            tambonEn: initValue,
+            zipcodeEn: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, amphoeEn: value }))
         }
-        setAmphoeEn(value)
         break
       case 'Tambon':
         if (value === '') {
-          setTambon(initValue)
-          setZipcode(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            tambon: initValue,
+            zipcode: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, tambon: value }))
         }
-        setTambon(value)
         break
       case 'TambonEn':
         if (value === '') {
-          setTambonEn(initValue)
-          setZipcodeEn(initValue)
+          setAddress((prevState) => ({
+            ...prevState,
+            tambonEn: initValue,
+            zipcodeEn: initValue,
+          }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, tambonEn: value }))
         }
-        setTambonEn(value)
         break
       case 'Zipcode':
         if (value === '') {
-          setZipcode(initValue)
+          setAddress((prevState) => ({ ...prevState, zipcode: initValue }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, zipcode: value }))
         }
-        setZipcode(value)
         break
       case 'ZipcodeEn':
         if (value === '') {
-          setZipcodeEn(initValue)
+          setAddress((prevState) => ({ ...prevState, zipcodeEn: initValue }))
+        } else {
+          setAddress((prevState) => ({ ...prevState, zipcodeEn: value }))
         }
-        setZipcodeEn(value)
         break
     }
   }
@@ -174,26 +196,10 @@ function App() {
           </Typography>
         </Box>
         <Card variant='elevation' sx={{ mb: 3 }}>
-          <ThaiAddressCard
-            thaiAddress={thaiAddress}
-            province={province}
-            amphoe={amphoe}
-            tambon={tambon}
-            zipcode={zipcode}
-            onChange={handleOnChange}
-            onSelect={handleOnSelect}
-          />
+          <ThaiAddressCard data={thaiAddress} state={address} onChange={handleOnChange} onSelect={handleOnSelect} />
         </Card>
         <Card variant='elevation'>
-          <EnglishAddressCard
-            thaiAddressEN={thaiAddressEN}
-            provinceEn={provinceEn}
-            amphoeEn={amphoeEn}
-            tambonEn={tambonEn}
-            zipcodeEn={zipcodeEn}
-            onChange={handleOnChange}
-            onSelect={handleOnSelect}
-          />
+          <EnglishAddressCard data={thaiAddressEN} state={address} onChange={handleOnChange} onSelect={handleOnSelect} />
         </Card>
       </Container>
     </Fragment>
