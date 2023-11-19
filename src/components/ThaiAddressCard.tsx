@@ -59,11 +59,11 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   id='combo-box-amphoe'
                   size='small'
                   fullWidth
-                  disabled={state.province?.key === 0 && state.province?.label === '' ? true : false}
-                  value={state.amphoe}
+                  disabled={state.provinceTh?.key === 0 && state.provinceTh?.label === '' ? true : false}
+                  value={state.amphoeTh}
                   options={
-                    state.province && data[state.province?.key]
-                      ? (data[state.province?.key][1] as any[]).map((amphoe: any, index: number) => {
+                    state.provinceTh && data[state.provinceTh?.key]
+                      ? (data[state.provinceTh?.key][1] as any[]).map((amphoe: any, index: number) => {
                           return { key: index, label: amphoe[0] }
                         })
                       : []
@@ -81,11 +81,11 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   id='combo-box-tambon'
                   size='small'
                   fullWidth
-                  disabled={state.amphoe?.key === 0 && state.amphoe?.label === '' ? true : false}
-                  value={state.tambon}
+                  disabled={state.amphoeTh?.key === 0 && state.amphoeTh?.label === '' ? true : false}
+                  value={state.tambonTh}
                   options={
-                    state.amphoe && data[state.province?.key] && data[state.province.key][1][state.amphoe.key]
-                      ? (data[state.province.key][1][state.amphoe.key][1] as any[]).map((tambon: any, index: number) => {
+                    state.amphoeTh && data[state.provinceTh?.key] && data[state.provinceTh.key][1][state.amphoeTh.key]
+                      ? (data[state.provinceTh.key][1][state.amphoeTh.key][1] as any[]).map((tambon: any, index: number) => {
                           return { key: index, label: tambon[0] }
                         })
                       : []
@@ -103,14 +103,14 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                   id='combo-box-zipcode'
                   size='small'
                   fullWidth
-                  disabled={state.tambon?.key === 0 && state.tambon?.label === '' ? true : false}
-                  value={state.zipcode}
+                  disabled={state.tambonTh?.key === 0 && state.tambonTh?.label === '' ? true : false}
+                  value={state.zipcodeTh}
                   options={
-                    state.tambon &&
-                    data[state.province?.key] &&
-                    data[state.province.key][1][state.amphoe?.key] &&
-                    data[state.province.key][1][state.amphoe.key][1][state.tambon.key]
-                      ? (data[state.province.key][1][state.amphoe.key][1][state.tambon.key][1] as any[]).map(
+                    state.tambonTh &&
+                    data[state.provinceTh?.key] &&
+                    data[state.provinceTh.key][1][state.amphoeTh?.key] &&
+                    data[state.provinceTh.key][1][state.amphoeTh.key][1][state.tambonTh.key]
+                      ? (data[state.provinceTh.key][1][state.amphoeTh.key][1][state.tambonTh.key][1] as any[]).map(
                           (zipcode: any, index: number) => ({
                             key: index,
                             label: zipcode.toString(),
