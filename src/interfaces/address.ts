@@ -1,12 +1,17 @@
+interface Location {
+  key: number;
+  label: string;
+}
+
 export interface Address {
-  province: { key: number; label: string }
-  amphoe: { key: number; label: string }
-  tambon: { key: number; label: string }
-  zipcode: { key: number; label: string }
-  provinceEn: { key: number; label: string }
-  amphoeEn: { key: number; label: string }
-  tambonEn: { key: number; label: string }
-  zipcodeEn: { key: number; label: string }
+  provinceTh: Location;
+  amphoeTh: Location;
+  tambonTh: Location;
+  zipcodeTh: Location;
+  provinceEn: Location;
+  amphoeEn: Location;
+  tambonEn: Location;
+  zipcodeEn: Location;
 }
 
 export type AddressDatabase = Province[]
