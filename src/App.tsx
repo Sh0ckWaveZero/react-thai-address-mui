@@ -18,10 +18,10 @@ const initValue = {
 
 function App() {
   const [address, setAddress] = useState<Address>({
-    province: initValue,
-    amphoe: initValue,
-    tambon: initValue,
-    zipcode: initValue,
+    provinceTh: initValue,
+    amphoeTh: initValue,
+    tambonTh: initValue,
+    zipcodeTh: initValue,
     provinceEn: initValue,
     amphoeEn: initValue,
     tambonEn: initValue,
@@ -35,7 +35,7 @@ function App() {
       case 'Province':
         setAddress((prevState) => ({
           ...prevState,
-          province: value,
+          provinceTh: value,
         }))
         break
       case 'ProvinceEn':
@@ -45,16 +45,16 @@ function App() {
         }))
         break
       case 'Amphoe':
-        if (address.province?.key === 0 && address.province?.label === '') {
+        if (address.provinceTh?.key === 0 && address.provinceTh?.label === '') {
           setAddress((prevState) => ({
             ...prevState,
-            province: value,
+            provinceTh: value,
           }))
           return
         }
         setAddress((prevState) => ({
           ...prevState,
-          amphoe: value,
+          amphoeTh: value,
         }))
         break
       case 'AmphoeEn':
@@ -65,11 +65,11 @@ function App() {
         setAddress((prevState) => ({ ...prevState, amphoeEn: value }))
         break
       case 'Tambon':
-        if (address.amphoe?.key === 0 && address.amphoe?.label === '') {
-          setAddress((prevState) => ({ ...prevState, tambon: initValue }))
+        if (address.amphoeTh?.key === 0 && address.amphoeTh?.label === '') {
+          setAddress((prevState) => ({ ...prevState, tambonTh: initValue }))
           return
         }
-        setAddress((prevState) => ({ ...prevState, tambon: value }))
+        setAddress((prevState) => ({ ...prevState, tambonTh: value }))
         break
       case 'TambonEn':
         if (address.amphoeEn?.key === 0 && address.amphoeEn?.label === '') {
@@ -79,11 +79,11 @@ function App() {
         setAddress((prevState) => ({ ...prevState, tambonEn: value }))
         break
       case 'Zipcode':
-        if (address.tambon?.key === 0 && address.tambon?.label === '') {
-          setAddress((prevState) => ({ ...prevState, zipcode: initValue }))
+        if (address.tambonTh?.key === 0 && address.tambonTh?.label === '') {
+          setAddress((prevState) => ({ ...prevState, zipcodeTh: initValue }))
           return
         }
-        setAddress((prevState) => ({ ...prevState, zipcode: value }))
+        setAddress((prevState) => ({ ...prevState, zipcodeTh: value }))
         break
       case 'ZipcodeEn':
         if (address.tambonEn?.key === 0 && address.tambonEn?.label === '') {
@@ -101,13 +101,13 @@ function App() {
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
-            province: initValue,
-            amphoe: initValue,
-            tambon: initValue,
-            zipcode: initValue,
+            provinceTh: initValue,
+            amphoeTh: initValue,
+            tambonTh: initValue,
+            zipcodeTh: initValue,
           }))
         } else {
-          setAddress((prevState) => ({ ...prevState, province: value }))
+          setAddress((prevState) => ({ ...prevState, provinceTh: value }))
         }
         break
       case 'ProvinceEn':
@@ -127,12 +127,12 @@ function App() {
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
-            amphoe: initValue,
-            tambon: initValue,
-            zipcode: initValue,
+            amphoeTh: initValue,
+            tambonTh: initValue,
+            zipcodeTh: initValue,
           }))
         } else {
-          setAddress((prevState) => ({ ...prevState, amphoe: value }))
+          setAddress((prevState) => ({ ...prevState, amphoeTh: value }))
         }
         break
       case 'AmphoeEn':
@@ -151,11 +151,11 @@ function App() {
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
-            tambon: initValue,
-            zipcode: initValue,
+            tambonTh: initValue,
+            zipcodeTh: initValue,
           }))
         } else {
-          setAddress((prevState) => ({ ...prevState, tambon: value }))
+          setAddress((prevState) => ({ ...prevState, tambonTh: value }))
         }
         break
       case 'TambonEn':
@@ -171,9 +171,9 @@ function App() {
         break
       case 'Zipcode':
         if (value === '') {
-          setAddress((prevState) => ({ ...prevState, zipcode: initValue }))
+          setAddress((prevState) => ({ ...prevState, zipcodeTh: initValue }))
         } else {
-          setAddress((prevState) => ({ ...prevState, zipcode: value }))
+          setAddress((prevState) => ({ ...prevState, zipcodeTh: value }))
         }
         break
       case 'ZipcodeEn':
