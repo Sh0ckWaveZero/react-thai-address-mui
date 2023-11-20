@@ -2,6 +2,7 @@ import { Address, AddressDatabase } from './interfaces/address'
 import { Box, Card, Container, Typography } from '@mui/material'
 import { Fragment, useState } from 'react'
 
+import { AddressType } from './types/address'
 import AppAppBar from './views/AppAppBar'
 import EnglishAddressCard from './components/EnglishAddressCard'
 import ThaiAddressCard from './components/ThaiAddressCard'
@@ -28,23 +29,23 @@ function App() {
     zipcodeEn: initValue,
   })
 
-  const handleOnChange = (type: string, event: any, value: any) => {
+  const handleOnChange = (type: AddressType, event: any, value: any) => {
     event.preventDefault()
 
     switch (type) {
-      case 'Province':
+      case 'provinceTh':
         setAddress((prevState) => ({
           ...prevState,
           provinceTh: value,
         }))
         break
-      case 'ProvinceEn':
+      case 'provinceEn':
         setAddress((prevState) => ({
           ...prevState,
           provinceEn: value,
         }))
         break
-      case 'Amphoe':
+      case 'amphoeTh':
         if (address.provinceTh?.key === 0 && address.provinceTh?.label === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -57,35 +58,35 @@ function App() {
           amphoeTh: value,
         }))
         break
-      case 'AmphoeEn':
+      case 'amphoeEn':
         if (address.provinceEn?.key === 0 && address.provinceEn?.label === '') {
           setAddress((prevState) => ({ ...prevState, amphoeEn: initValue }))
           return
         }
         setAddress((prevState) => ({ ...prevState, amphoeEn: value }))
         break
-      case 'Tambon':
+      case 'tambonTh':
         if (address.amphoeTh?.key === 0 && address.amphoeTh?.label === '') {
           setAddress((prevState) => ({ ...prevState, tambonTh: initValue }))
           return
         }
         setAddress((prevState) => ({ ...prevState, tambonTh: value }))
         break
-      case 'TambonEn':
+      case 'tambonEn':
         if (address.amphoeEn?.key === 0 && address.amphoeEn?.label === '') {
           setAddress((prevState) => ({ ...prevState, tambonEn: initValue }))
           return
         }
         setAddress((prevState) => ({ ...prevState, tambonEn: value }))
         break
-      case 'Zipcode':
+      case 'zipCodeTh':
         if (address.tambonTh?.key === 0 && address.tambonTh?.label === '') {
           setAddress((prevState) => ({ ...prevState, zipcodeTh: initValue }))
           return
         }
         setAddress((prevState) => ({ ...prevState, zipcodeTh: value }))
         break
-      case 'ZipcodeEn':
+      case 'zipCodeEn':
         if (address.tambonEn?.key === 0 && address.tambonEn?.label === '') {
           setAddress((prevState) => ({ ...prevState, zipcodeEn: initValue }))
           return
@@ -95,9 +96,9 @@ function App() {
     }
   }
 
-  const handleOnSelect = (type: string, value: any) => {
+  const handleOnSelect = (type: AddressType, value: any) => {
     switch (type) {
-      case 'Province':
+      case 'provinceTh':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -110,7 +111,7 @@ function App() {
           setAddress((prevState) => ({ ...prevState, provinceTh: value }))
         }
         break
-      case 'ProvinceEn':
+      case 'provinceEn':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -123,7 +124,7 @@ function App() {
           setAddress((prevState) => ({ ...prevState, provinceEn: value }))
         }
         break
-      case 'Amphoe':
+      case 'amphoeTh':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -135,7 +136,7 @@ function App() {
           setAddress((prevState) => ({ ...prevState, amphoeTh: value }))
         }
         break
-      case 'AmphoeEn':
+      case 'amphoeEn':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -147,7 +148,7 @@ function App() {
           setAddress((prevState) => ({ ...prevState, amphoeEn: value }))
         }
         break
-      case 'Tambon':
+      case 'tambonTh':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -158,7 +159,7 @@ function App() {
           setAddress((prevState) => ({ ...prevState, tambonTh: value }))
         }
         break
-      case 'TambonEn':
+      case 'tambonEn':
         if (value === '') {
           setAddress((prevState) => ({
             ...prevState,
@@ -169,14 +170,14 @@ function App() {
           setAddress((prevState) => ({ ...prevState, tambonEn: value }))
         }
         break
-      case 'Zipcode':
+      case 'zipCodeTh':
         if (value === '') {
           setAddress((prevState) => ({ ...prevState, zipcodeTh: initValue }))
         } else {
           setAddress((prevState) => ({ ...prevState, zipcodeTh: value }))
         }
         break
-      case 'ZipcodeEn':
+      case 'zipCodeEn':
         if (value === '') {
           setAddress((prevState) => ({ ...prevState, zipcodeEn: initValue }))
         } else {
