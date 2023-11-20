@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { CardHeader, CardContent, Grid, Typography, TextField } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
 
-type AddressType = 'Province' | 'Amphoe' | 'Tambon' | 'Zipcode'
+type AddressType = 'provinceTh' | 'amphoeTh' | 'tambonTh' | 'zipCodeTh'
 interface ThaiAddressCardProps {
   data: any[]
   state: any
@@ -48,9 +48,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                     return { key: index, label: province[0] }
                   })}
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={(event: any, value: any) => onChange('Province', event, value)}
+                  onChange={(event: any, value: any) => onChange('provinceTh', event, value)}
                   renderInput={(params) => <TextField {...params} label='จังหวัด' />}
-                  onInputChange={(_, value: any) => onSelect('Province', value)}
+                  onInputChange={(_, value: any) => onSelect('provinceTh', value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -69,9 +69,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={(event: any, value: any) => onChange('Amphoe', event, value)}
+                  onChange={(event: any, value: any) => onChange('amphoeTh', event, value)}
                   renderInput={(params) => <TextField {...params} label='อำเภอ' />}
-                  onInputChange={(_, value: any) => onSelect('Amphoe', value)}
+                  onInputChange={(_, value: any) => onSelect('amphoeTh', value)}
                 />
               </Grid>
 
@@ -91,9 +91,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={(event: any, value: any) => onChange('Tambon', event, value)}
+                  onChange={(event: any, value: any) => onChange('tambonTh', event, value)}
                   renderInput={(params) => <TextField {...params} label='ตำบล' />}
-                  onInputChange={(_, value: any) => onSelect('Tambon', value)}
+                  onInputChange={(_, value: any) => onSelect('tambonTh', value)}
                 />
               </Grid>
 
@@ -119,9 +119,9 @@ const ThaiAddressCard: React.FC<ThaiAddressCardProps> = ({ data, state, onChange
                       : []
                   }
                   isOptionEqualToValue={(option, value) => option.key === value.key && option.label === value.label}
-                  onChange={(event: any, value: any) => onChange('Zipcode', event, value)}
+                  onChange={(event: any, value: any) => onChange('zipCodeTh', event, value)}
                   renderInput={(params) => <TextField {...params} label='รหัสไปรษณีย์' />}
-                  onInputChange={(_, value: any) => onSelect('Zipcode', value)}
+                  onInputChange={(_, value: any) => onSelect('zipCodeTh', value)}
                 />
               </Grid>
             </Grid>
